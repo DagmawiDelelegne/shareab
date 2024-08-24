@@ -1,0 +1,40 @@
+{% extends 'shareab/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container bg-light shadow-md p-5 form_layout">
+    <h2>Add Book</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary mt-2">Add Book</button>
+    </form>
+    <hr>
+    <h3>Your Books</h3>
+    <div id="book_list">
+        {% if user_books %}
+            <ul>
+                {% for book in user_books %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <p class="card-title">Title: {{ book.title }}</p>
+                        <p class="card-text">Author: {{ book.author }}</p>
+                        <p class="card-text">Course: {{ book.course }}</p>
+                        <p class="card-text">Edition: {{ book.edition }}</p>
+                        {% if book.image %}
+                        <img src="{{ book.image.url }}" class="card-img-top" alt="{{ book.title }}">
+                        {% endif %}
+                        <form method="POST" action="{% url 'delete_book' book.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You have not added any books yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+}
+
+p, a, button, input, textarea {
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar {
+    font-family: 'Roboto', sans-serif;
+}
+
+.btn {
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-control{
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.card-img-top{
+    margin-bottom: 5px;
+}
+
+.container{
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.button-container{
+    text-align: center;
+}
+
+.search{
+    margin-left: 30px;
+}
+

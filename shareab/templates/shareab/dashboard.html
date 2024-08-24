@@ -1,0 +1,46 @@
+{% extends 'shareab/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container bg-light shadow-md p-5 form_layout">
+    <div class = search>
+    <h2 >Search for Books</h2>
+    </div>
+    <form method="GET" action="{% url 'search_books' %}" id="search_form">
+        {% csrf_token %}
+        {{ form|crispy }}
+       <div class = button-container >
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
+       </div>
+        
+    </form>
+    <hr>
+    <div id="search_results">
+        {% if results is not None %}
+            {% if results %}
+            <h3>Search Results:</h3>
+            <ul>
+                {% for book in results %}
+                
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <P class="card-title">Title: {{ book.title }}</P>
+                        <p class="card-text">Added by: {{ book.user.username }}</p>
+                        <p class="card-text">Social: {{ book.user.email }}</p>
+                        <p class="card-text">Author: {{ book.author }}</p>
+                        <p class="card-text">Course: {{ book.course }}</p>
+                        <p class="card-text">Edition: {{ book.edition }}</p>
+                        {% if book.image %}
+                        <img src="{{ book.image.url }}" class="card-img-top" alt="{{ book.title }}">
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h4>No books found</h4>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
